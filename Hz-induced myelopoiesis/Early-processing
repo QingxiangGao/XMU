@@ -1,0 +1,6 @@
+sh /disk1/software/bbmap/bbduk2.sh in=/pathway/PBS-1_1.clean.fq.gz in2=/pathway/PBS-1_2.clean.fq.gz outm=/pathway/PBS-1_1_TSO.fq.gz outm2=/pathway/PBS-1_2_TSO.fq.gz fliteral=AAGCAGTGGTATCAACGCAGAGTACGT k=27 skipr2=t hdist=3 -Xmx58g
+sh /disk1/software/bbmap/bbduk2.sh in=/pathway/PBS-1_1_TSO.fq.gz in2=/pathway/PBS-1_2_TSO.fq.gz outm=/pathway/PBS-1_1_a.fq.gz outm2=/pathway/PBS-1_2_a.fq.gz fliteral=CGACTCACTACAGGG k=15 skipr2=t hdist=3 -Xmx58g
+sh /disk1/software/bbmap/bbduk2.sh in=/pathway/PBS-1_1_a.fq.gz in2=/pathway/PBS-1_2_a.fq.gz outm=/pathway/PBS-1_1_b.fq.gz outm2=/pathway/PBS-1_2_b.fq.gz fliteral=TCGGTGACACGATCG k=15 skipr2=t hdist=3 -Xmx58g
+sh /disk1/software/bbmap/bbduk2.sh in=/pathway/PBS-1_1_b.fq.gz in2=/pathway/PBS-1_2_b.fq.gz outm=/pathway/PBS-1_1_c.fq.gz outm2=/pathway/PBS-1_2_c.fq.gz fliteral=TTTTTTTTTTTT k=12 skipr2=t hdist=3 -Xmx58g
+java -jar /disk1/software/picard/picard.jar FastqToSam F1=/pathway/PBS-1_1_c.fq.gz F2=/pathway/PBS-1_2_c.fq.gz O=/pathway/PBS.bam QUALITY_FORMAT=Standard SAMPLE_NAME=PBS
+sh /disk1/software/Drop-seq_tools-2.5.1/DGE.sh -g /pathway/mm10_STAR/ -r /pathway/mm10.fasta.gz -d /pathway/Drop-seq_tools-2.5.1 -o /pathway/PBS/ -t /pathway/PBS/ -s /pathway/STAR-2.7.10a/bin/Linux_x86_64/STAR /pathway/PBS.bam
